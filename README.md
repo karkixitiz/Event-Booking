@@ -2,13 +2,15 @@
 
 Designing Full stack Event Booking web Application.
 
-## Graphql API
+## Features
 
+### GraphQL API
+	- Schemas and Resolvers
+	- `npm i express-graphql graphql`
+### React SAP
 
-    
-In the project directory, you can run:
-
-### `npm i express bodyparser`
-
-### `npm i --save-dev nodemon`
+### Mongodb
+### Node/Express
+	- `npm i express bodyparser`
+	- `npm i --save-dev nodemon`
 
