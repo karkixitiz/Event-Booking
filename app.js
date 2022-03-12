@@ -2,10 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const graphqlHttp = require("express-graphql").graphqlHTTP;
 const { buildSchema } = require("graphql");
+const mongoose = require("mongoose");
+
+const Event = require("./models/event");
 
 const app = express();
-
-const events = [];
 
 const port = 3000;
 
@@ -47,23 +48,55 @@ app.use(
 	`),
         rootValue: {
             events: () => {
-                return events;
+                return Event.find()
+                    .then((events) => {
+                        return events.map((event) => {
+                            return {...event._doc, _id: event.id }; //spread operator and convert object type _id to string
+                        });
+                    })
+                    .catch((err) => {
+                        throw err;
+                    });
             },
             createEvent: (args) => {
-                const event = {
-                    _id: Math.random().toString(),
+                /* const event = {
+				_id: Math.random().toString(),
+				title: args.eventInput.title,
+				description: args.eventInput.description,
+				price: +args.eventInput.price,
+				date: new Date().toISOString(),
+				}; */
+
+                const event = new Event({
                     title: args.eventInput.title,
                     description: args.eventInput.description,
                     price: +args.eventInput.price,
-                    date: new Date().toISOString(),
-                };
-                events.push(event);
-                return event;
+                    date: new Date(args.eventInput.date),
+                });
+                return event
+                    .save()
+                    .then((result) => {
+                        console.log(result);
+                        return {...result._doc, _id: result._doc._id.toString() }; //spread operator
+                    })
+                    .catch((err) => {
+                        console.lgo(err);
+                        throw err;
+                    });
             },
         }, //bundle of all resolvers
         graphiql: true,
     })
 );
 
-app.listen(port);
-console.log(`Express server is running on ${port}`);
+mongoose
+    .connect(
+        `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.epmo5.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`
+    )
+    .then(() => {
+        app.listen(port);
+        console.log(`Express server is running on ${port}`);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
