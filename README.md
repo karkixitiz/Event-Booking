@@ -16,22 +16,42 @@ Designing Full stack Event Booking web Application.
 	- npm i --save-dev nodemon
 
 ## GraphiQL  Script
-- Get all Events list
+- Get all Events only
 	query{
 	events {
 		title
 		price
-		
 	}
+	}
+- Get Events with user's detail
+	query{
+		events{
+					creator{
+						email
+						createdEvents{
+							title
+							creator{
+							email
+							}
+						}
+				}
+			}
 	}
 
-- Create an Event
+
+- Create an Event and return event's details
 	mutation{createEvent(eventInput:{title:"test",description:"test desc", price:23.99,date:"2020-12-06T09:26:30.645Z"}){
 	title
 	description
 	}
 	}
-
+- Create an Event and return event's with user detail
+	mutation{createEvent(eventInput:{title:"test",description:"test desc", price:23.99,date:"2020-12-06T09:26:30.645Z"}){
+		creator{
+			email
+			}
+		}
+	}
 -Create a User
 	mutation{
 	createUser(userInput:{email:"karkikiran714@gmail.com",password:"test123"}){
