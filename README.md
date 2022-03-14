@@ -37,8 +37,28 @@ Designing Full stack Event Booking web Application.
 				}
 			}
 	}
-
-
+- Get user and event details through booking id
+query{
+  bookings{
+    _id
+    createdAt
+    event{
+      title
+      creator{
+        email
+      }
+    }
+  }
+}
+ - Cancel Booking
+ mutation{
+  cancelBooking(bookingId:"622f05636afd7199db78a94c"){
+    title
+    creator{
+      email
+    }
+  }
+}
 - Create an Event and return event's details
 	mutation{createEvent(eventInput:{title:"test",description:"test desc", price:23.99,date:"2020-12-06T09:26:30.645Z"}){
 	title
