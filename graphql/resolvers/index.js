@@ -1,4 +1,4 @@
-const userResolver = require("./user");
+const userResolver = require("./auth");
 const eventsResolver = require("./events");
 const bookingResolver = require("./booking");
 
