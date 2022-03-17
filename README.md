@@ -8,7 +8,7 @@ Designing Full stack Event Booking web Application.
 	- Schemas and Resolvers
 	- npm i express-graphql graphql
 ### React SAP
-
+	- npm install react-router-dom@5.2.0
 ### Mongodb
 	- npm install mongoose --save
 ### Node/Express
