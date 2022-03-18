@@ -5,9 +5,11 @@
 	width: 100%;
 	height: 3.5rem;
 	background: #01d1d1;
-	padding:0 1rem;
+	padding:0 2rem;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	box-sizing: border-box;
 }
 
 .main-navigation__logo h1{
@@ -22,18 +24,29 @@ font-size: 1.5rem;
 	list-style: none;
 	padding:0;
 	margin:0;
+	align-item:center;
 }
 .main-navigation__items li{
 	margin: 0 1rem;
 
 }
-.main-navigation__items a{
+.main-navigation__items a,
+.main-navigation_items button{
 	text-decoration: none;
 	color:#000;
+	padding:0.25rem 0.5rem;
+	border:none;
+	font:inherit;
+	background:transparent ;
+	cursor: pointer;
+	margin:0;
 }
 .main-navigation__items a:hover,
 .main-navigation__items a:active,
-.main-navigation__items a.active{
+.main-navigation__items a.active,
+.main-navigation__items button:hover,
+.main-navigation__items button:active
+{
 	color:white;
 }
 
